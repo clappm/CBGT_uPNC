@@ -442,7 +442,7 @@ def compileAndRunSweepALL(trials=1, offset=0, sweepcount=1, parallel=4):
         for trial in range(0, trials):
             outdir = getDirectory(sweepnumber)
             seed = np.random.randint(0, 1000)
-            if (trial * sweepcount + sweepnumber + 1) % parallel == 0:
+            if (trial * sweepcount + sweepnumber + 1) % parallel == 0 or trial == trials - 1:
                 call('./sim -ns -n{} -s{}'.format(str(trial+offset), str(seed+trial+offset)), shell=True, cwd=outdir)
             else:
                 Popen('./sim -ns -n{} -s{}'.format(str(trial+offset), str(seed+trial+offset)), shell=True, cwd=outdir)
